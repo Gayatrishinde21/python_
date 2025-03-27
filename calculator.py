@@ -14,7 +14,7 @@ def calculator():
         
         operation = input("Enter operation: ")
         
-        if operation == 'q':
+        if operation == 'e':
             print("Exit Calculator")
             break
         
