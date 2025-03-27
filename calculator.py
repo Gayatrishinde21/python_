@@ -51,3 +51,14 @@ def calculator():
         print("Result:", result)
 
 calculator()
+
+
+#result.is_integer() checks if result is a whole number.
+
+#If result is a whole number (like 4.0), it converts it to an integer (4) using int(result).
+
+#If result is a decimal value (like 4.5), this condition is not met, and result remains unchanged.
+
+#if result.is_integer(): result = int(result)
+
+#This part of the code ensures that if the calculation result is a whole number (like 4.0), it is converted to an integer (4) for a cleaner output.
