@@ -1,0 +1,117 @@
+import csv
+
+# Function to create a CSV file and add headers
+def create_csv():
+    with open('user_data.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['ID', 'Name', 'Age'])  # Writing headers
+    print("CSV file created successfully!")
+
+# Function to read and display the content of the CSV file
+def read_csv():
+    try:
+        with open('user_data.csv', mode='r') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                print(row)
+    except FileNotFoundError:
+        print("CSV file not found!")
+
+# Function to add data to the CSV file
+def write_csv():
+    id = input("Enter ID: ")
+    name = input("Enter Name: ")
+    age = input("Enter Age: ")
+    
+    with open('user_data.csv', mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([id, name, age])  # Writing the data to the CSV file
+    print("Data added successfully!")
+
+# Function to update data in the CSV file
+def update_csv():
+    id_to_update = input("Enter ID to update: ")
+    found = False
+    rows = []
+    
+    try:
+        with open('user_data.csv', mode='r') as file:
+            reader = csv.reader(file)
+            rows = list(reader)
+        
+        with open('user_data.csv', mode='w', newline='') as file:
+            writer = csv.writer(file)
+            for row in rows:
+                if row[0] == id_to_update:
+                    name = input("Enter new Name: ")
+                    age = input("Enter new Age: ")
+                    writer.writerow([id_to_update, name, age])  # Update the row
+                    found = True
+                else:
+                    writer.writerow(row)  # Keep other rows unchanged
+
+        if found:
+            print("Record updated successfully!")
+        else:
+            print("Record not found!")
+    except FileNotFoundError:
+        print("CSV file not found!")
+
+# Function to delete data from the CSV file
+def delete_csv():
+    id_to_delete = input("Enter ID to delete: ")
+    found = False
+    rows = []
+    
+    try:
+        with open('user_data.csv', mode='r') as file:
+            reader = csv.reader(file)
+            rows = list(reader)
+        
+        with open('user_data.csv', mode='w', newline='') as file:
+            writer = csv.writer(file)
+            for row in rows:
+                if row[0] != id_to_delete:
+                    writer.writerow(row)  # Write all rows except the one to delete
+                else:
+                    found = True
+
+        if found:
+            print("Record deleted successfully!")
+        else:
+            print("Record not found!")
+    except FileNotFoundError:
+        print("CSV file not found!")
+
+# Main program loop to let the user interact with the CSV file
+def main():
+    while True:
+        print("\nChoose an option:")
+        print("1. Create CSV file")
+        print("2. Read CSV file")
+        print("3. Add data to CSV file")
+        print("4. Update data in CSV file")
+        print("5. Delete data from CSV file")
+        print("6. Exit")
+        
+        choice = input("Enter your choice (1-6): ")
+        
+        if choice == '1':
+            create_csv()
+        elif choice == '2':
+            read_csv()
+        elif choice == '3':
+            write_csv()
+        elif choice == '4':
+            update_csv()
+        elif choice == '5':
+            delete_csv()
+        elif choice == '6':
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice, please try again.")
+
+# Run the main function
+if __name__ == "__main__":
+    main()
