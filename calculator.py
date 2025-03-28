@@ -2,14 +2,15 @@ def calculator():
     print("Welcome to Calculator!")
     
     while True:
-        print("\nOperations:")
+        print("Operations:")
         print("+ : Addition")
         print("- : Subtraction")
         print("* : Multiplication")
         print("/ : Division")
         print("% : Modulus")
+        print("p : percentage")
         print("x2 : Square")
-        print("√ : Square Root")
+        print("sqrt : Square Root")
         print("e : Exit")
         
         operation = input("Enter operation: ")
@@ -20,10 +21,10 @@ def calculator():
         
         num1 = float(input("Enter first number: "))
         
-        if operation in ['x2', '√']:
+        if operation in ['x2', 'sqrt']:
             if operation == 'x2':
                 result = num1 ** 2
-            elif operation == '√':
+            elif operation == 'sqrt':
                 result = num1 ** 0.5
         else:
             num2 = float(input("Enter second number: "))
@@ -38,6 +39,12 @@ def calculator():
                     result = num1 / num2
                 else:
                     print("Error! Cannot Divide by zero")
+                    continue
+            elif operation == 'p':
+                if num2 != 0:
+                    result = (num1 / num2) *100
+                else:
+                    print("Cannot calculate percentage by 0")
                     continue
             elif operation == '%':
                 result = num1 % num2
