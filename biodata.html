@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Biodata Form</title>
+
+</head>
+
+<body>
+
+    <h1>Biodata Form</h1>
+
+    <form id="biodataForm" enctype="multipart/form-data">
+
+        <label for="firstName">First Name:</label>
+
+        <input type="text" id="firstName" name="firstName" required><br><br>
+
+
+        <label for="lastName">Last Name:</label>
+
+        <input type="text" id="lastName" name="lastName" required><br><br>
+
+
+        <label for="address">Address:</label>
+
+        <input type="text" id="address" name="address" required><br><br>
+
+
+        <label for="dob">Date of Birth:</label>
+
+        <input type="date" id="dob" name="dob" required><br><br>
+
+
+        <label>Gender:</label>
+
+        <input type="radio" id="male" name="gender" value="Male" required>
+
+        <label for="male">Male</label>
+
+        <input type="radio" id="female" name="gender" value="Female">
+
+        <label for="female">Female</label><br><br>
+
+
+        <label for="hobbies">Hobbies:</label>
+
+        <select id="hobbies" name="hobbies" multiple>
+
+            <option value="Reading">Reading</option>
+
+            <option value="Traveling">Traveling</option>
+
+            <option value="Gaming">Gaming</option>
+
+            <option value="Sports">Sports</option>
+
+        </select><br><br>
+
+
+        <label for="photo">Upload Photo:</label>
+
+        <input type="file" id="photo" name="photo" accept="image/*"><br><br>
+
+
+        <button type="button" onclick="submitForm()">Submit</button>
+
+    </form>
+
+
+    <script>
+
+        function submitForm() {
+
+            const formData = new FormData(document.getElementById('biodataForm'));
+
+            fetch('http://192.168.6.91:5000/save_biodata', {
+
+                method: 'POST',
+
+                body: formData
+
+            })
+
+            .then(response => response.json())
+
+            .then(data => {
+
+                alert('Data saved successfully!');
+
+                console.log(data);
+
+            })
+
+            .catch(error => {
+
+                console.error('Error:', error);
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
