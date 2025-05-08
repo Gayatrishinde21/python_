@@ -1,23 +1,48 @@
-# Step 1: Raw data
-values = [500, 600, 1200, 1000, 400, 900]
+#for standard deviation
+import pandas as pd
+import openpyxl
+import math
 
-# Step 2: Calculate mean (x̄)
-n = len(values)
-mean = sum(values) / n
+data = { 
+    "continents": ["Africa","Asia","Europe","North America","Oceania","South America"],
+    "1990": [500,600,1200,1000,400,900]
+}
 
-# Step 3: Calculate squared differences (xi - x̄)²
-squared_diffs = []
-for value in values:
-    diff = value - mean
-    squared_diffs.append(diff ** 2)
+#
+print(data.get("1990"))
+v_sum=data.get("1990")
+#value n
+print("sum is: ",sum(v_sum))
+#sum
+length= len(v_sum)
+print("sum is: ",length)
+#mean
+Mean = sum(v_sum)/length
+print("Mean is: ",Mean)
+#x-x bar difference
+for x in v_sum:
+    x = x - Mean
+    print("difference is: ",x)
+#square difference
+total = 0
+for x in v_sum:
+    squr_diff = pow(x - Mean,2)
+    total += squr_diff
+    print("square difference is: ",squr_diff)
+#total
+print("total is: ",total)
+#variance
+variance = total/(length-1)
+print("variance is: ",variance)
 
-# Step 4: Calculate variance (using (n - 1) for sample variance)
-variance = sum(squared_diffs) / (n - 1)
+#standard deviation
+std_dev=math.sqrt(variance)
+print("standard deviation is: ",std_dev)
 
-# Step 5: Calculate standard deviation (s)
-std_deviation = variance ** 0.5
+# save to excel file
+df = pd.DataFrame(data)
+df.loc[len(df)] = ["Mean", Mean]  # Adding Mean row
+df.loc[len(df)] = ["Total", total]  # Adding Total row
+df.loc[len(df)] = ["Standard Deviation", std_dev]  
 
-# Output
-print("Mean (x̄):", mean)
-print("Variance (s²):", variance)
-print("Sample Standard Deviation (s):", std_deviation)
+df.to_excel("output.xlsx", index=False)
